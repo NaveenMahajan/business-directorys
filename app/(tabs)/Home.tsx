@@ -7,27 +7,29 @@ import { ScrollView, View } from "react-native";
 
 export default function Home() {
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingTop: 55, padding: 25 }}
-    >
-      <View
-        style={{
-          backgroundColor: "#38bdf8",
-          height: 300,
-          width: "200%",
-          position: "absolute",
-          top: 0,
-          left: -100,
-        }}
-      />
+    <View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingTop: 55, padding: 25 }}
+      >
+        <View
+          style={{
+            backgroundColor: "#38bdf8",
+            height: 300,
+            width: "200%",
+            position: "absolute",
+            top: 0,
+            left: -100,
+          }}
+        />
 
-      <Header />
+        <Header />
 
-      <Sliders />
+        <Sliders />
 
-      <CategoryList />
-      <PopularBusiness />
-    </ScrollView>
+        <CategoryList />
+        <PopularBusiness />
+      </ScrollView>
+    </View>
   );
 }
