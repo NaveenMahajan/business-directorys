@@ -3,7 +3,11 @@ import { Stack } from "expo-router";
 export default function RootLayout() {
   return (
     <ClerkProvider>
-      <Stack />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
     </ClerkProvider>
   );
 }

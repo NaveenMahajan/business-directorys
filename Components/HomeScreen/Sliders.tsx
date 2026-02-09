@@ -51,7 +51,7 @@ export default function Sliders() {
         index: currentIndex.current,
         animated: true,
       });
-    }, 4000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);

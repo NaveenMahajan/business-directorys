@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   FlatList,
@@ -52,6 +53,7 @@ const categories = [
 ];
 
 const CategoryList = () => {
+  const router = useRouter();
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -64,9 +66,20 @@ const CategoryList = () => {
       <FlatList
         data={categories}
         numColumns={4}
+        scrollEnabled={false}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() =>
+              router.push({
+                pathname: "/business_list",
+                params: {
+                  categoriesName: item.name,
+                },
+              })
+            }
+          >
             <View style={styles.iconBox}>
               <Image source={item.image} style={styles.icon} />
             </View>
