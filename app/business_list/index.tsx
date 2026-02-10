@@ -80,7 +80,26 @@ const BusinessList = () => {
             <View>
               <Text style={styles.name}>{item.name}</Text>
               <Text style={styles.address}>{item.address}</Text>
-              <Text style={styles.rating}>⭐ {item.rating}</Text>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "150",
+                }}
+              >
+                <Text style={styles.rating}>⭐ {item.rating}</Text>
+                <TouchableOpacity>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: "#12aa19",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    View
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         )}

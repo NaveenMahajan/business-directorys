@@ -145,7 +145,7 @@ export const businessData = [
   },
   {
     id: "10",
-    category: "Grocery Store",
+    category: "Grocery",
     name: "Fresh Basket Store",
     image: require("../assets/./popularbusiness/grocery.webp"),
     address: "Green Park",
