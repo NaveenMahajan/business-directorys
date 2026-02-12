@@ -1,52 +1,31 @@
+import BusinessListCard from "@/Components/BusinessListScreen/BusinessListCard";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    FlatList,
-    Image,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { businessData } from "../../data/businessData";
 
-const BusinessList = () => {
+export default function BusinessList() {
   const { categoriesName } = useLocalSearchParams();
-  const router = useRouter();
-
-  const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
-
+  const router = useRouter();
   const filteredList = businessData.filter(
     (item) =>
       item.category === categoriesName &&
       item.name.toLowerCase().includes(searchText.toLowerCase()),
   );
 
-  const onRefresh = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
-
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          position: "absolute",
-          top: 0,
-          left: -100,
-          width: "200%",
-          height: 200,
-          backgroundColor: "#38bdf8",
-          borderBottomLeftRadius: 400,
-          borderBottomRightRadius: 600,
-        }}
-      />
+    <View style={{ flex: 1 }}>
+      {/* Background shape */}
+      <View style={styles.headerBackground} />
 
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
@@ -58,69 +37,36 @@ const BusinessList = () => {
         <Text style={styles.title}>{categoriesName} Business List</Text>
       </View>
 
-      {/* Search */}
-      <View>
-        <TextInput
-          placeholder="Search business..."
-          value={searchText}
-          onChangeText={setSearchText}
-          style={styles.searchInput}
-        />
-      </View>
-
-      {/* Business list */}
-      <FlatList
-        data={filteredList}
-        keyExtractor={(item) => item.id}
-        onRefresh={onRefresh}
-        refreshing={loading}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Image source={item.image} style={styles.image} />
-            <View>
-              <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.address}>{item.address}</Text>
-              <View
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: "150",
-                }}
-              >
-                <Text style={styles.rating}>⭐ {item.rating}</Text>
-                <TouchableOpacity>
-                  <Text
-                    style={{
-                      fontSize: 15,
-                      color: "#12aa19",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    View
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        )}
+      <TextInput
+        placeholder="Search business..."
+        value={searchText}
+        onChangeText={setSearchText}
+        style={styles.searchInput}
       />
+
+      <BusinessListCard data={filteredList} />
     </View>
   );
-};
-
-export default BusinessList;
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    paddingTop: 50,
+  headerBackground: {
+    position: "absolute",
+    top: 0,
+    left: -100,
+    width: "160%",
+    height: 250,
+    backgroundColor: "#38bdf8",
+    borderBottomLeftRadius: 300,
+    borderBottomRightRadius: 500,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+    marginTop: 50,
     marginBottom: 15,
+    paddingHorizontal: 15,
   },
   backIcon: {
     width: 35,
@@ -129,39 +75,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#000",
   },
   searchInput: {
-    backgroundColor: "white",
-    borderRadius: 99,
-    paddingHorizontal: 20,
-    marginTop: 10,
-    fontSize: 15,
-    height: 45,
-  },
-  card: {
-    marginTop: 20,
-    flexDirection: "row",
-    gap: 15,
-    backgroundColor: "#cad8e7",
-    padding: 12,
-    borderRadius: 12,
+    marginHorizontal: 15,
     marginBottom: 15,
-    alignItems: "center",
-  },
-  image: {
-    width: 80,
-    height: 80,
+    backgroundColor: "#fff",
+    padding: 10,
     borderRadius: 10,
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  address: {
-    color: "gray",
-    marginVertical: 2,
-  },
-  rating: {
-    fontWeight: "600",
   },
 });
