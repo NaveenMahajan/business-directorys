@@ -13,7 +13,6 @@ import {
   View,
 } from "react-native";
 
-/* ---------------- Browser warmup (Android) ---------------- */
 export const useWarmUpBrowser = () => {
   useEffect(() => {
     if (Platform.OS !== "android") return;
@@ -26,7 +25,6 @@ export const useWarmUpBrowser = () => {
 
 WebBrowser.maybeCompleteAuthSession();
 
-/* ---------------- Screen ---------------- */
 export default function Index() {
   useWarmUpBrowser();
 
@@ -34,12 +32,10 @@ export default function Index() {
   const { user } = useUser();
   const navigation = useNavigation();
 
-  /* -------- Hide header -------- */
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
-  /* -------- Create user in Strapi (NO navigation here) -------- */
   useEffect(() => {
     if (!user) return;
 
@@ -60,7 +56,6 @@ export default function Index() {
     createNewUser();
   }, [user]);
 
-  /* -------- Google Sign In (Clerk Expo v2.19.21) -------- */
   const onPress = useCallback(async () => {
     try {
       const { createdSessionId, setActive } = await startSSOFlow({
@@ -73,7 +68,7 @@ export default function Index() {
       setActive?.({
         session: createdSessionId,
         navigate: () => {
-          router.replace("/(tabs)/Home"); // ✅ correct Expo Router path
+          router.replace("/(tabs)/Home");
         },
       });
     } catch (err) {
@@ -81,7 +76,6 @@ export default function Index() {
     }
   }, [startSSOFlow]);
 
-  /* ---------------- UI ---------------- */
   return (
     <View style={styles.container}>
       <Image
@@ -119,7 +113,6 @@ export default function Index() {
   );
 }
 
-/* ---------------- Styles ---------------- */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
