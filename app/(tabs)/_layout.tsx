@@ -33,14 +33,14 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="Favorite"
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="heart" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="Profile"
         options={{

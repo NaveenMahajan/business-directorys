@@ -39,7 +39,7 @@ export default function Profiledetails() {
     ]);
   };
   const onCall = async () => {
-    const phoneNumber = "tel:9876543210";
+    const phoneNumber = "tel:9589971714";
 
     const supported = await Linking.canOpenURL(phoneNumber);
 
