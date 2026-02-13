@@ -51,7 +51,7 @@ const BusinessListCard = ({ data }: Props) => {
                     router.push({
                       pathname: "/business-details",
                       params: {
-                        businessid: item.id,
+                        id: item.id,
                       },
                     })
                   }

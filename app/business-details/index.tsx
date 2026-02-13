@@ -5,9 +5,9 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { businessData } from "../../data/businessData";
 
 export default function BusinessDetail() {
-  const { businessid } = useLocalSearchParams();
+  const { id } = useLocalSearchParams();
   const router = useRouter();
-  const business = businessData.find((item) => item.id === businessid);
+  const business = businessData.find((item) => item.id === id);
   if (!business) {
     return (
       <View>
