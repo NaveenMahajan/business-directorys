@@ -1,12 +1,12 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import {
-    FlatList,
-    Image,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 const popularBusinesses = [
@@ -78,7 +78,7 @@ export default function ExploreBusinessList() {
             onPress={() =>
               router.push({
                 pathname: "/business-details",
-                params: { businessid: item.id },
+                params: { id: item.id },
               })
             }
           >
