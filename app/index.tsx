@@ -45,7 +45,6 @@ export default function Index() {
     }
   }, [isLoaded, user]);
 
-  // ✅ Create user in backend after login
   useEffect(() => {
     if (!user) return;
 
@@ -65,13 +64,13 @@ export default function Index() {
     createNewUser();
   }, [user]);
 
-  // 🔥 FINAL SSO FUNCTION
   const onPress = useCallback(async () => {
     try {
       const { createdSessionId, setActive } = await startSSOFlow({
         strategy: "oauth_google",
         redirectUrl: AuthSession.makeRedirectUri({
-          scheme: "businessdirectory", // must match app.json
+          scheme: "businessdirectory",
+          path: "oauth-native-callback",
         }),
       });
 
@@ -80,8 +79,6 @@ export default function Index() {
       await setActive?.({
         session: createdSessionId,
       });
-
-      // ❌ DO NOT navigate here
     } catch (err) {
       console.error("SSO Error:", err);
     }
