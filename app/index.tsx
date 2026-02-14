@@ -36,10 +36,12 @@ export default function Index() {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
-  // ✅ Auto redirect if already logged in
+  // ✅ Auto redirect after login (PRODUCTION SAFE)
   useEffect(() => {
     if (isLoaded && user) {
-      router.replace("/(tabs)/Home");
+      setTimeout(() => {
+        router.replace("/(tabs)/Home");
+      }, 500);
     }
   }, [isLoaded, user]);
 
@@ -63,25 +65,23 @@ export default function Index() {
     createNewUser();
   }, [user]);
 
-  // 🔥 FIXED SSO FUNCTION (Production Safe)
+  // 🔥 FINAL SSO FUNCTION
   const onPress = useCallback(async () => {
     try {
       const { createdSessionId, setActive } = await startSSOFlow({
         strategy: "oauth_google",
         redirectUrl: AuthSession.makeRedirectUri({
-          scheme: "businessdirectory", // 👈 must match app.json
+          scheme: "businessdirectory", // must match app.json
         }),
       });
 
       if (!createdSessionId) return;
 
-      // ✅ Activate session
       await setActive?.({
         session: createdSessionId,
       });
 
-      // ✅ Manual navigation after activation
-      router.replace("/(tabs)/Home");
+      // ❌ DO NOT navigate here
     } catch (err) {
       console.error("SSO Error:", err);
     }
