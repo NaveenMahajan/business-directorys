@@ -9,7 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.naveen001.businessdirectory",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +23,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.naveen001.businessdirectory"
     },
     "web": {
       "output": "static",
@@ -43,6 +48,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "clerkPublishableKey": "pk_test_ZW5hYmxpbmctbWFja2VyZWwtNzguY2xlcmsuYWNjb3VudHMuZGV2JA",
+      "router": {},
+      "eas": {
+        "projectId": "887f4bd2-9919-4d01-a591-e06aa1252d43"
+      }
     }
   }
 }
