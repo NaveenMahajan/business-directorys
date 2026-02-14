@@ -29,25 +29,32 @@ export default function Index() {
   useWarmUpBrowser();
 
   const { startSSOFlow } = useSSO();
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const navigation = useNavigation();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
+  // ✅ Auto redirect if already logged in
+  useEffect(() => {
+    if (isLoaded && user) {
+      router.replace("/(tabs)/Home");
+    }
+  }, [isLoaded, user]);
+
+  // ✅ Create user in backend after login
   useEffect(() => {
     if (!user) return;
 
     const createNewUser = async () => {
       try {
-        const res = await axiosClient.post("/user-lists", {
+        await axiosClient.post("/user-lists", {
           data: {
             fullName: user.fullName,
             email: user.primaryEmailAddress?.emailAddress,
           },
         });
-        console.log("User saved:", res.data);
       } catch (e) {
         console.log("User exists or error:", e);
       }
@@ -56,21 +63,25 @@ export default function Index() {
     createNewUser();
   }, [user]);
 
+  // 🔥 FIXED SSO FUNCTION (Production Safe)
   const onPress = useCallback(async () => {
     try {
       const { createdSessionId, setActive } = await startSSOFlow({
         strategy: "oauth_google",
-        redirectUrl: AuthSession.makeRedirectUri(),
+        redirectUrl: AuthSession.makeRedirectUri({
+          scheme: "businessdirectory", // 👈 must match app.json
+        }),
       });
 
       if (!createdSessionId) return;
 
-      setActive?.({
+      // ✅ Activate session
+      await setActive?.({
         session: createdSessionId,
-        navigate: () => {
-          router.replace("/(tabs)/Home");
-        },
       });
+
+      // ✅ Manual navigation after activation
+      router.replace("/(tabs)/Home");
     } catch (err) {
       console.error("SSO Error:", err);
     }
