@@ -89,17 +89,6 @@ export default function Profiledetails() {
           </Pressable>
 
           <Pressable
-            onPress={() => router.push("/Favorite")}
-            style={({ pressed }) => [
-              styles.menuItem,
-              { backgroundColor: pressed ? "#f2f2f2" : "#fff" },
-            ]}
-          >
-            <MaterialIcons name="favorite" size={24} color="black" />
-            <Text style={styles.menuText}>Favorite</Text>
-          </Pressable>
-
-          <Pressable
             onPress={onShare}
             style={({ pressed }) => [
               styles.menuItem,
