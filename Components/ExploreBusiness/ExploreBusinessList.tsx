@@ -1,3 +1,4 @@
+import { businessData } from "@/data/businessData";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -9,63 +10,14 @@ import {
   View,
 } from "react-native";
 
-const popularBusinesses = [
-  {
-    id: "1",
-    name: "Star Coffee",
-    category: "Coffee Shop",
-    address: "Main Market Road, Sector 4",
-    rating: 4.5,
-    image: require("../../assets/popularbusiness/Coffee.webp"),
-  },
-  {
-    id: "2",
-    name: "Power Gym",
-    category: "Fitness Center",
-    address: "Green Park Street, Sector 9",
-    rating: 4.3,
-    image: require("../../assets/popularbusiness/gym.jpg"),
-  },
-  {
-    id: "3",
-    name: "Fresh Mart",
-    category: "Grocery Store",
-    address: "MG Road, City Center",
-    rating: 4.6,
-    image: require("../../assets/popularbusiness/grocery.webp"),
-  },
-  {
-    id: "4",
-    name: "Royal Salon",
-    category: "Salon",
-    address: "Market Street, Downtown",
-    rating: 4.4,
-    image: require("../../assets/popularbusiness/Salone.avif"),
-  },
-  {
-    id: "5",
-    name: "Spice Garden",
-    category: "Restaurant",
-    address: "Station Road, Sector 12",
-    rating: 4.7,
-    image: require("../../assets/popularbusiness/Coffee.webp"),
-  },
-  {
-    id: "6",
-    name: "Sweet Treats Bakery",
-    category: "Cake Shop",
-    address: "Mall Road, Near City Mall",
-    rating: 4.8,
-    image: require("../../assets/popularbusiness/gym.jpg"),
-  },
-];
+
 
 export default function ExploreBusinessList() {
   const router = useRouter();
   return (
     <View style={styles.container}>
       <FlatList
-        data={popularBusinesses}
+        data={businessData}
         style={{ paddingBottom: 80 }}
         initialNumToRender={10}
         windowSize={5}
@@ -82,7 +34,7 @@ export default function ExploreBusinessList() {
               })
             }
           >
-            <Image source={item.image} style={styles.image} />
+            <Image source={{ uri: item.image }} style={styles.image} />
 
             <View style={styles.info}>
               <Text style={styles.name}>{item.name}</Text>

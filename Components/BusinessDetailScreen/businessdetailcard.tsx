@@ -31,7 +31,7 @@ export default function BusinessDetailsCard({ data }: Props) {
   return (
     <ScrollView>
       <View>
-        <Image source={image} style={styles.heroImage} />
+        <Image source={{ uri: image }} style={styles.heroImage} />
 
         {/* <TouchableOpacity
           style={styles.backButton}

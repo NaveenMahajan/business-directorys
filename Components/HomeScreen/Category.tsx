@@ -59,7 +59,7 @@ const CategoryList = () => {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Category</Text>
-        <Text style={styles.viewAll}>View All</Text>
+        <Text style={styles.viewAll}>View all</Text>
       </View>
 
       {/* Grid */}

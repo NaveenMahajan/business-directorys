@@ -36,7 +36,7 @@ export default function Index() {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
-  // ✅ Auto redirect after login (PRODUCTION SAFE)
+
   useEffect(() => {
     if (isLoaded && user) {
       setTimeout(() => {

@@ -1,3 +1,4 @@
+import { businessData } from "@/data/businessData";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -9,32 +10,7 @@ import {
   View,
 } from "react-native";
 
-const popularBusinesses = [
-  {
-    id: "1",
-    name: "Star Coffee",
-    category: "Coffee Shop",
-    image: require("../../assets/popularbusiness/Coffee.webp"),
-  },
-  {
-    id: "2",
-    name: "Power Gym",
-    category: "Fitness Center",
-    image: require("../../assets/popularbusiness/gym.jpg"),
-  },
-  {
-    id: "3",
-    name: "Fresh Mart",
-    category: "Grocery Store",
-    image: require("../../assets/popularbusiness/grocery.webp"),
-  },
-  {
-    id: "4",
-    name: "Royal Salon",
-    category: "Salon",
-    image: require("../../assets/popularbusiness/Salone.avif"),
-  },
-];
+
 
 const PopularBusinessList = () => {
   const router = useRouter();
@@ -46,7 +22,7 @@ const PopularBusinessList = () => {
       </View>
 
       <FlatList
-        data={popularBusinesses}
+        data={businessData.slice(0, 5)}
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
@@ -62,7 +38,7 @@ const PopularBusinessList = () => {
               })
             }
           >
-            <Image source={item.image} style={styles.image} />
+            <Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.category}>{item.category}</Text>
             <View

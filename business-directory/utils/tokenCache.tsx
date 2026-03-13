@@ -13,6 +13,6 @@ export const tokenCache: TokenCache = {
   async saveToken(key: string, value: string) {
     try {
       await SecureStore.setItemAsync(key, value);
-    } catch {}
+    } catch { }
   },
 };
